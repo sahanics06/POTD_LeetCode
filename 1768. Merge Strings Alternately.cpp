@@ -59,6 +59,7 @@ public:
         {
             s=s+word2.substr(i);
         }
-        return s;
+        return s; // If we replace the above if else conditions then we can replace it by
+                  //return s+word1.substr(i)+word2.substr(i);
     }
 };
