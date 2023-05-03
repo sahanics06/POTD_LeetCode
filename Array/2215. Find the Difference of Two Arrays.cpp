@@ -72,3 +72,60 @@ public:
         return answer;
     }
 };
+
+// Solution using set
+
+class Solution {
+public:
+    vector<int> solve(vector<int>&nums1, vector<int>&nums2)
+    {
+        unordered_set<int>s;
+        bool flag=true;
+        for(int i=0; i<nums1.size(); i++)
+        {
+            flag=true;
+            for(int j=0; j<nums2.size(); j++)
+            {
+                if(nums1[i]==nums2[j])
+                {
+                    flag=false;
+                    break;
+                }
+            }
+            if(flag)
+            {
+                s.insert(nums1[i]);
+            }
+        }
+        return vector<int>(s.begin(), s.end());
+    }
+    vector<vector<int>> findDifference(vector<int>& nums1, vector<int>& nums2) {
+        return {solve(nums1, nums2), solve(nums2, nums1)};
+    }
+};
+
+// Solution using hashmap so reducing one for loop.
+class Solution {
+public:
+    vector<int> solve(vector<int>&nums1, vector<int>&nums2)
+    {
+        unordered_set<int>v;
+        unordered_map<int, int>m;
+        bool flag=true;
+        for(int i=0; i<nums2.size(); i++)
+        {
+            m[nums2[i]]++;
+        }
+        for(int i=0; i<nums1.size(); i++)
+        {
+            if(m.find(nums1[i])==m.end())
+            {
+                v.insert(nums1[i]);
+            }
+        }
+        return vector<int>(v.begin(), v.end());
+    }
+    vector<vector<int>> findDifference(vector<int>& nums1, vector<int>& nums2) {
+        return {solve(nums1, nums2), solve(nums2, nums1)};
+    }
+};
