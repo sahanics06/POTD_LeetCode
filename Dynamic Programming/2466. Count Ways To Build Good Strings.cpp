@@ -22,6 +22,7 @@ Constraints:
 */
 
 // Only recursion. TLE
+// We can see that only length is required. So no need to form the string.
 class Solution {
 public:
     int mod=1e9+7;
@@ -45,7 +46,8 @@ public:
     }
 };
 
-// Solution optimised code , recursion plus memoization
+// Solution optimised code , recursion plus memoization.
+// We can see that only the length is variable so no need for two variables taken above.
 
 class Solution {
 public:
