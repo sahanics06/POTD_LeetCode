@@ -13,7 +13,7 @@ The number of nodes in the tree is in the range [0, 105].
 -1000 <= Node.val <= 1000
 */
 
-// Solution
+// Solution using BFS
 
 class Solution {
 public:
@@ -41,5 +41,34 @@ public:
             }
         }
         return 0;
+    }
+};
+
+
+// Solution using DFS
+
+class Solution {
+public:
+    int ans=INT_MAX;
+    void dfs(TreeNode *root, int height)
+    {
+        if(root==NULL)
+            return ;
+        if(root->left==NULL && root->right==NULL)
+        {
+            ans=min(ans, height);
+        }
+        height++;
+        if(root->left)
+            dfs(root->left, height);
+        if(root->right)
+            dfs(root->right, height);
+    }
+    int minDepth(TreeNode* root) {
+        if(root==NULL)
+            return 0;
+        int height=1;
+        dfs(root, height);
+        return ans;
     }
 };
