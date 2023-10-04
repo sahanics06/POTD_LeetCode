@@ -1,0 +1,76 @@
+/*
+Given an array of integers nums, return the number of good pairs.
+
+A pair (i, j) is called good if nums[i] == nums[j] and i < j. 
+
+Example 1:
+
+Input: nums = [1,2,3,1,1,3]
+Output: 4
+Explanation: There are 4 good pairs (0,3), (0,4), (3,4), (2,5) 0-indexed.
+Example 2:
+
+Input: nums = [1,1,1,1]
+Output: 6
+Explanation: Each pair in the array are good.
+Example 3:
+
+Input: nums = [1,2,3]
+Output: 0
+
+Constraints:
+
+1 <= nums.length <= 100
+1 <= nums[i] <= 100
+
+*/
+
+//**********************************************************************************************************************
+
+// Solution
+
+// Using one loop, we add the previous number of counts for current number. 
+// If 1 1 1, here for 3rd 1 we have previous count as 2 and we can have 2 pairs with 3rd 1.
+
+class Solution {
+public:
+    int numIdenticalPairs(vector<int>& nums) {
+        vector<int>freq(101,0);
+        int ans=0;
+        for(int i=0; i<nums.size(); i++)
+        {
+            ans+=freq[nums[i]];
+            freq[nums[i]]++;
+        }
+        return ans;
+    }
+};
+
+
+
+class Solution {
+public:
+    int numIdenticalPairs(vector<int>& nums) {
+        vector<int>tmp(101,0);
+        for(int i=0; i<nums.size(); i++)
+        {
+            tmp[nums[i]]++;
+        }
+        int ans=0;
+        for(int i=0; i<=100; i++)
+        {
+            int count=tmp[i];
+            if(count==0)
+                continue;
+            if(count==2)
+            {
+                ans+=1;
+            }
+            else
+            {
+                ans= ans+(count*(count-1)/2);
+            }
+        }
+        return ans;
+    }
+};
